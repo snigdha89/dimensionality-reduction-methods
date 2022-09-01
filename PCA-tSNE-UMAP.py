@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import pandas as pd
 import re
 from stop_words import get_stop_words
@@ -19,10 +13,6 @@ warnings.filterwarnings('ignore')
 import dblp
 import umap
 import numpy as np
-
-
-# In[2]:
-
 
 resultsg1 = dblp.search(["Gradient"],2021)
 resultsg2 = dblp.search(["Gradient"],2020)
@@ -44,18 +34,10 @@ document6 = resultso2['Title']
 document7 = resultso3['Title']
 document8 = resultso4['Title']
 
-
-# In[3]:
-
-
 totdoc = [document1, document2, document3, document4, document5, document6,document7,document8]
 df = pd.DataFrame(columns = ['Title'])
 df= pd.concat(totdoc, ignore_index=True)
 fin_list = df.to_list()
-
-
-# In[4]:
-
 
 # list for tokenized documents in loop
 texts = []
@@ -85,18 +67,12 @@ for words in texts:
 print(corpus[:1])
 
 
-# In[5]:
-
-
 # Creating the TF-IDF model
 cv2 = TfidfVectorizer()
 X2 = cv2.fit_transform(corpus).toarray()
 print("\n TF-IDF Matrix-->\n",X2)
 
 print(np.shape(X2))
-
-
-# In[6]:
 
 
 ##### PCA
@@ -114,9 +90,6 @@ plt.show()
 print(np.shape(PCA_result))
 
 
-# In[7]:
-
-
 ###### tsne
 
 tsne = TSNE(n_components=2, verbose=1, perplexity=40, n_iter=300)
@@ -131,9 +104,6 @@ plt.show()
 print(np.shape(tsne_results))
 
 
-# In[8]:
-
-
 ###UMAP
 
 fit = umap.UMAP()
@@ -146,10 +116,4 @@ plt.ylabel("Y(Dimension 2)")
 plt.savefig("UMAP_Scatter_plot")
 plt.show()
 print(np.shape(u))
-
-
-# In[ ]:
-
-
-
 
